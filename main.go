@@ -13,7 +13,7 @@ import (
 
 const (
 	defaultPort    = 8080
-	defaultHost    = "0.0.0.0"
+	defaultHost    = "127.0.0.1" // personal preference: bind to localhost only by default
 	appVersion     = "1.0.0"
 	appName        = "sub2api"
 )
@@ -119,13 +119,14 @@ func handleSub(c *gin.Context) {
 		return
 	}
 	// TODO: delegate to subscription parser
-	c.JSON(http.StatusNotImplemented, gin.H{"message": "not yet implemented", "url": url})
+	c.JSON(http.StatusNotImplemented, gin.H{"message": "not yet implemented"})
 }
 
-// getEnv returns the value of an environment variable or a fallback string.
+// getEnv returns the value of the environment variable named by key,
+// or fallback if the variable is not set or empty.
 func getEnv(key, fallback string) string {
-	if v, ok := os.LookupEnv(key); ok {
-		return v
+	if val, ok := os.LookupEnv(key); ok && val != "" {
+		return val
 	}
 	return fallback
 }
