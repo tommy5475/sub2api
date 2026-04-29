@@ -13,7 +13,7 @@ import (
 
 const (
 	defaultPort    = 8080
-	defaultHost    = "127.0.0.1" // personal preference: bind to localhost only by default
+	defaultHost    = "0.0.0.0" // bind to all interfaces so it's reachable in my homelab setup
 	appVersion     = "1.0.0"
 	appName        = "sub2api"
 )
@@ -119,14 +119,3 @@ func handleSub(c *gin.Context) {
 		return
 	}
 	// TODO: delegate to subscription parser
-	c.JSON(http.StatusNotImplemented, gin.H{"message": "not yet implemented"})
-}
-
-// getEnv returns the value of the environment variable named by key,
-// or fallback if the variable is not set or empty.
-func getEnv(key, fallback string) string {
-	if val, ok := os.LookupEnv(key); ok && val != "" {
-		return val
-	}
-	return fallback
-}
