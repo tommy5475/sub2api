@@ -13,7 +13,7 @@ import (
 
 const (
 	defaultPort    = 8080
-	defaultHost    = "127.0.0.1" // bind to localhost only — I don't need external access on my machine
+	defaultHost    = "0.0.0.0" // bind to all interfaces so I can reach it from other devices on my LAN
 	appVersion     = "1.0.0"
 	appName        = "sub2api"
 )
@@ -118,4 +118,4 @@ func handleSub(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "url query parameter is required"})
 		return
 	}
-	// TODO: delegate to subscription par
+	// TODO: delegate to subscri
